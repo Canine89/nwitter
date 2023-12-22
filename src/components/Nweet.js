@@ -1,17 +1,17 @@
-import { dbService, storageService } from 'fbase';
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { dbService, storageService } from "fbase";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newNweet, setNewNweet] = useState(nweetObj.text);
 
   const onDeleteClick = async () => {
-    const ok = window.confirm('삭제하시렵니까?');
+    const ok = window.confirm("삭제하시렵니까?");
     if (ok) {
       await dbService.doc(`nweets/${nweetObj.id}`).delete();
-      if (nweetObj.attachmentUrl !== '')
+      if (nweetObj.attachmentUrl !== "")
         await storageService.refFromURL(nweetObj.attachmentUrl).delete();
     }
   };
